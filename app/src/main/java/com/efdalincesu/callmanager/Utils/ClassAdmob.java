@@ -9,8 +9,8 @@ import com.google.android.gms.ads.MobileAds;
 public class ClassAdmob {
 
 
-    private static final String reklamID = "ca-app-pub-2323838972684036~2519678097";
-    private static final String gecisID = "ca-app-pub-2323838972684036/9778666103";
+    private static final String reklamID = "ca-app-pub-************";
+    private static final String gecisID = "ca-app-pub-************";
 
 
     public static AdRequest getAdRequest(Context context) {
