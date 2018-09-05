@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Call Manager</string>
+    <string name="messages_title">Messages</string>
+    <string name="new_message_dialog">New Message</string>
+    <string name="menu_title">Choose Action</string>
+    <string name="edit">Edit</string>
+    <string name="not_change">These text can not be changed!</string>
+    <string name="dialog_add_button">Add</string>
+    <string name="created_manager">Manager Created.</string>
+    <string name="delete">Delete</string>
+    <string name="pazar">S</string>
+    <string name="pazartesi">M</string>
+    <string name="sali">T</string>
+    <string name="carsamba">W</string>
+    <string name="persembe">T</string>
+    <string name="cuma">F</string>
+    <string name="cumartesi">S</string>
+    <string name="null_text">Not null.</string>
+    <string name="blocked_calls">Blocked Calls</string>
+    <string name="admob_banner_id">ca-app-pub-2323838972684036/8968147314</string>
+</resources>

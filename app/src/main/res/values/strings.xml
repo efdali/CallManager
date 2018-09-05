@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Call Manager</string>
+    <string name="messages_title">Hazır Mesajlar</string>
+    <string name="new_message_dialog">Yeni Hazır Mesaj</string>
+    <string name="menu_title">İşlem Seç</string>
+    <string name="edit">Düzenle</string>
+    <string name="not_change">Bu metin Değiştirilemez!</string>
+    <string name="dialog_add_button">Ekle</string>
+    <string name="created_manager">Manager Oluşturuldu.</string>
+    <string name="delete">Sil</string>
+    <string name="pazar">P</string>
+    <string name="pazartesi">P</string>
+    <string name="sali">S</string>
+    <string name="carsamba">Ç</string>
+    <string name="persembe">P</string>
+    <string name="cuma">C</string>
+    <string name="cumartesi">C</string>
+    <string name="null_text">Boş bırakalamaz.</string>
+    <string name="blocked_calls">Engellenen Çağrılar</string>
+    <string name="admob_banner_id">ca-app-pub-2323838972684036/8968147314</string>
+</resources>

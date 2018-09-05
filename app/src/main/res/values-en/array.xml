@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="hizliMsj">
+
+        <item>I can not speak right now.</item>
+        <item>I will call you later.</item>
+        <item>On Way.</item>
+        <item>What Happened?</item>
+        <item>I am busy.</item>
+
+    </string-array>
+
+</resources>

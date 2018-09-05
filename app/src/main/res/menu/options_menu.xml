@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/add"
+        android:icon="@android:drawable/ic_input_add"
+        android:title="@string/dialog_add_button"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/blockedCalls"
+        android:icon="@android:drawable/stat_notify_missed_call"
+        android:title="@string/blocked_calls"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/msg"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="@string/messages_title"
+        app:showAsAction="always" />
+
+</menu>

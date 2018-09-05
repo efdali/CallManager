@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="hizliMsj">
+
+        <item>Şu anda konuşamam.</item>
+        <item>Seni daha sonra ararım.</item>
+        <item>Yoldayım.</item>
+        <item>Ne oldu?</item>
+        <item>Meşgulüm.</item>
+
+    </string-array>
+
+</resources>
