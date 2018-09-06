@@ -2,7 +2,6 @@ package com.efdalincesu.callmanager.Adapters;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,63 +19,21 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.efdalincesu.callmanager.MainActivity;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.Models.Date;
 import com.efdalincesu.callmanager.R;
-import com.efdalincesu.callmanager.Utils.AlarmManager;
+import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.IDays;
 import com.efdalincesu.callmanager.Utils.MyDialog;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     ArrayAdapter<String> adapter;
     ArrayList<Alarm> alarmList;
-    AlarmManager alarmManager;
     Context context;
     int pos;
-    CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-
-            int day = 0;
-            int id = buttonView.getId();
-
-            switch (id) {
-                case R.id.pazar:
-                    day = IDays.SUNDAY;
-                    break;
-                case R.id.pazartesi:
-                    day = IDays.MONDAY;
-                    break;
-                case R.id.sali:
-                    day = IDays.TUESDAY;
-                    break;
-                case R.id.carsamba:
-                    day = IDays.WEDNESDAY;
-                    break;
-                case R.id.persembe:
-                    day = IDays.THURSDAY;
-                    break;
-                case R.id.cuma:
-                    day = IDays.FRIDAY;
-                    break;
-                case R.id.cumartesi:
-                    day = IDays.SATURDAY;
-                    break;
-            }
-            if (isChecked) {
-
-                AlarmManager.getInstance().getAlarm(pos).getDays().add(day);
-            } else {
-                AlarmManager.getInstance().getAlarm(pos).setDays(day);
-            }
-        }
-    };
 
     public RecyclerViewAdapter(ArrayList<Alarm> alarmList, Context context) {
         this.alarmList = alarmList;
@@ -98,7 +55,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-        alarmManager=AlarmManager.getInstance();
         pos = position;
         holder.basSaat.setText(alarmList.get(position).getBaslangicDate().getTarih());
         holder.bitSaat.setText(alarmList.get(position).getBitisDate().getTarih());
@@ -111,7 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Date date = new Date(hourOfDay, minute);
-                        alarmManager.getAlarm(position).setBaslangicDate(date);
+                        alarmList.get(position).setBaslangicDate(date);
                         holder.basSaat.setText(date.getTarih());
                     }
                 });
@@ -125,7 +81,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         Date date = new Date(hourOfDay, minute);
-                        alarmManager.getAlarm(position).setBitisDate(date);
+                        alarmList.get(position).setBitisDate(date);
                         holder.bitSaat.setText(date.getTarih());
                     }
                 });
@@ -135,23 +91,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                alarmManager.getAlarm(position).setState(isChecked);
+                alarmList.get(position).setState(isChecked);
             }
         });
 
-        SharedPreferences preferences = context.getSharedPreferences(MainActivity.SHARED_NAME, Context.MODE_PRIVATE);
 
-        String gelen[] = context.getResources().getStringArray(R.array.hizliMsj);
-
-        HashSet<String> set = (HashSet<String>) preferences.getStringSet(MainActivity.SHARED_MESSAGES, new HashSet<String>());
-        ArrayList<String> list = new ArrayList<>();
-        String[] dizi = set.toArray(new String[0]);
-        for (int i = 0; i < gelen.length; i++) {
-            list.add(gelen[i]);
-        }
-        for (int i = 0; i < dizi.length; i++) {
-            list.add(dizi[i]);
-        }
+        ArrayList<String> list = new AllManager(context).getMessages();
 
         adapter = new ArrayAdapter(context, R.layout.support_simple_spinner_dropdown_item, list);
 
@@ -159,7 +104,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                alarmManager.getAlarm(pos).setMessage(parent.getSelectedItem().toString());
+                alarmList.get(pos).setMessage(parent.getSelectedItem().toString());
             }
 
             @Override
@@ -168,9 +113,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
-        holder.spinner.setSelection(getIndex(holder.spinner, alarmManager.getAlarm(position).getMessage()));
-        ArrayList<Integer> gunler=alarmList.get(position).getDays();
-        for (int i : gunler) {
+        holder.spinner.setSelection(getIndex(holder.spinner, alarmList.get(position).getMessage()));
+
+        for (int i : alarmList.get(position).getDayList()) {
 
             if (i == 1) {
                 holder.pazar.setChecked(true);
@@ -189,26 +134,65 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         }
 
+
         holder.sil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alarm alarm=null;
+                Alarm alarm = null;
                 try {
-                    alarm=alarmManager.getAlarm(position);
-                    alarmManager.getAlarm().remove(alarm);
+                    alarm = alarmList.get(position);
+                    alarmList.remove(alarm);
                     notifyItemRemoved(position);
                     notifyDataSetChanged();
-                    pos=position;
 
-                    for (Alarm alarm1:alarmManager.getAlarm()){
-                        Log.d("eklendi",alarm1.getDays().toString()+" : "+alarm1.getDays().size());
-                    }
 
                 } catch (Exception e) {
-                    Toast.makeText(context, "Silinemedi! Sistemsel bir hata... "+    e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Silinemedi! Sistemsel bir hata... " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+                int day = 0;
+                int id = buttonView.getId();
+
+                switch (id) {
+                    case R.id.pazar:
+                        day = IDays.SUNDAY;
+                        break;
+                    case R.id.pazartesi:
+                        day = IDays.MONDAY;
+                        break;
+                    case R.id.sali:
+                        day = IDays.TUESDAY;
+                        break;
+                    case R.id.carsamba:
+                        day = IDays.WEDNESDAY;
+                        break;
+                    case R.id.persembe:
+                        day = IDays.THURSDAY;
+                        break;
+                    case R.id.cuma:
+                        day = IDays.FRIDAY;
+                        break;
+                    case R.id.cumartesi:
+                        day = IDays.SATURDAY;
+                        break;
+                }
+                if (isChecked) {
+                    alarmList.get(position).getDayList().add(day);
+                    Log.d("eklendi", "posdan " + position + " " + day + " eklendi");
+                    Log.d("eklendi", "pos : " + position + " " + alarmList.get(position).getDayList().toString());
+                } else {
+                    Log.d("eklendi", day + " kaldırıldı");
+                    alarmList.get(position).removeDays(day);
+                }
+            }
+        };
 
         holder.pazar.setOnCheckedChangeListener(listener);
         holder.pazartesi.setOnCheckedChangeListener(listener);

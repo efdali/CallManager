@@ -1,6 +1,5 @@
 package com.efdalincesu.callmanager;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.ClassAdmob;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -36,9 +36,10 @@ public class MessageActivity extends AppCompatActivity {
     HashSet<String> msgSet;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    String[] setArray;
     ArrayList<String> adapterList;
     Resources res;
+
+    AllManager allManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +59,19 @@ public class MessageActivity extends AppCompatActivity {
 
         registerForContextMenu(listView);
 
-        preferences = getSharedPreferences(MainActivity.SHARED_NAME, Context.MODE_PRIVATE);
-        editor = preferences.edit();
-        String gelen[] = getResources().getStringArray(R.array.hizliMsj);
-        adapterList = new ArrayList<>();
-        msgSet = (HashSet<String>) preferences.getStringSet(MainActivity.SHARED_MESSAGES, new HashSet<String>());
-        setArray = msgSet.toArray(new String[0]);
-        for (int i = 0; i < gelen.length; i++) {
-            adapterList.add(gelen[i]);
-        }
-        for (int j = 0; j < setArray.length; j++) {
-            adapterList.add(setArray[j]);
-        }
+        allManager =new AllManager(this);
+
+        msgSet= allManager.getMessagesHashSet();
+
+        preferences = allManager.preferences;
+        editor = allManager.editor;
+
+
+        adapterList = allManager.getMessages();
+
+
+
+
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, adapterList);
 
 
@@ -176,9 +178,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     public void saveShared() {
-        editor.clear();
-        editor.putStringSet(MainActivity.SHARED_MESSAGES, msgSet);
-        editor.commit();
+        allManager.commitMessages(msgSet);
         adapter.notifyDataSetChanged();
     }
 

@@ -8,14 +8,10 @@ import android.telephony.PhoneStateListener;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 
-import com.efdalincesu.callmanager.MainActivity;
 import com.efdalincesu.callmanager.Models.Alarm;
-import com.efdalincesu.callmanager.Models.BlockedCall;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.efdalincesu.callmanager.Utils.AllManager;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +24,7 @@ public class CallReceiver extends BroadcastReceiver {
     Context context;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    Gson gson;
-
+    AllManager allManager;
     @Override
     public void onReceive(Context context, Intent ıntent) {
 
@@ -75,16 +70,10 @@ public class CallReceiver extends BroadcastReceiver {
 
     public Alarm bul() {
 
-        preferences = context.getSharedPreferences(MainActivity.SHARED_NAME, Context.MODE_PRIVATE);
-        editor = preferences.edit();
-        ArrayList<Alarm> arrayList = null;
-        gson = new Gson();
-        String obj = preferences.getString(MainActivity.SHARED_ALARMS, null);
-        if (!(obj == null)) {
-            Type type = new TypeToken<ArrayList<Alarm>>() {
-            }.getType();
-            arrayList = gson.fromJson(obj, type);
-        }
+        allManager =new AllManager(context);
+        preferences = allManager.preferences;
+        editor = allManager.editor;
+        ArrayList<Alarm> arrayList = allManager.getAlarms();
 
         Calendar calendar = Calendar.getInstance();
         DateFormat format = new SimpleDateFormat("HH");
@@ -100,7 +89,7 @@ public class CallReceiver extends BroadcastReceiver {
             bitisSaat = alarm.getBitisDate().saat;
             bitisDakika = alarm.getBitisDate().dakika;
             state = alarm.isState();
-            for (int i : alarm.getDays()) {
+            for (int i : alarm.getDayList()) {
 
                 if (i == gun) {
                     if (state) {
@@ -135,21 +124,7 @@ public class CallReceiver extends BroadcastReceiver {
 
     public void saveBlockedCall() {
 
-        String obj = preferences.getString(MainActivity.SHARED_CALLS, null);
-        ArrayList<BlockedCall> blockedCalls = null;
-        if (!(obj == null)) {
-            Type type = new TypeToken<ArrayList<BlockedCall>>() {
-            }.getType();
-            blockedCalls = gson.fromJson(obj, type);
-        } else {
-            blockedCalls = new ArrayList<>();
-        }
-
-        blockedCalls.add(new BlockedCall(incomingNumber));
-
-        String stringObject = gson.toJson(blockedCalls);
-        editor.putString(MainActivity.SHARED_CALLS, stringObject);
-        editor.commit();
+        allManager.commitCalls(incomingNumber);
 
     }
 

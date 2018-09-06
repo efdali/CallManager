@@ -1,37 +1,28 @@
 package com.efdalincesu.callmanager.Models;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Alarm {
 
-    private Date baslangicDate,bitisDate;
+    private Date baslangicDate, bitisDate;
     private ArrayList<Integer> days;
     private boolean state;
     private String message;
 
-    public Alarm(ArrayList<Integer> daysList,Date baslangicDate,Date bitisDate){
+    public Alarm(ArrayList<Integer> daysList, Date baslangicDate, Date bitisDate) {
 
         this.baslangicDate = baslangicDate;
         this.bitisDate = bitisDate;
-        this.message="Dersteyim";
-        this.state=true;
-        this.days=daysList;
+        this.message = "Dersteyim";
+        this.state = true;
+        if (daysList!=null) {
+            this.days = daysList;
+        }else {
+            this.days=new ArrayList<>();
+        }
 
-    }
-    public Alarm(Date baslangicDate, Date bitisDate, ArrayList<Integer> days) {
-        state=true;
-        message="Seni Hemen Arıyacağım!";
-        this.baslangicDate = baslangicDate;
-        this.bitisDate = bitisDate;
-        this.days = days;
-    }
-
-    public Alarm(Date baslangicDate, Date bitisDate, ArrayList<Integer> days, String message) {
-        state=true;
-        this.baslangicDate = baslangicDate;
-        this.bitisDate = bitisDate;
-        this.days = days;
-        this.message = message;
     }
 
     public boolean isState() {
@@ -63,37 +54,45 @@ public class Alarm {
     }
 
     public void setBitisDate(Date bitisDate) {
-        if (baslangicDate.saat<bitisDate.saat){
+        if (baslangicDate.saat < bitisDate.saat) {
             this.bitisDate = bitisDate;
-        }else if (baslangicDate.saat==bitisDate.saat){
-            if (baslangicDate.dakika<bitisDate.dakika){
-                this.bitisDate=bitisDate;
-            }else{
-                if (bitisDate.dakika+10>=60){
-                    bitisDate.saat=bitisDate.saat+1;
-                    this.bitisDate=bitisDate;
-                }else{
-                    bitisDate.dakika+=10;
-                    this.bitisDate=bitisDate;
+        } else if (baslangicDate.saat == bitisDate.saat) {
+            if (baslangicDate.dakika < bitisDate.dakika) {
+                this.bitisDate = bitisDate;
+            } else {
+                if (bitisDate.dakika + 10 >= 60) {
+                    bitisDate.saat = bitisDate.saat + 1;
+                    this.bitisDate = bitisDate;
+                } else {
+                    bitisDate.dakika += 10;
+                    this.bitisDate = bitisDate;
                 }
             }
-        }else if (baslangicDate.saat>bitisDate.saat){
+        } else if (baslangicDate.saat > bitisDate.saat) {
 
-            bitisDate.saat=baslangicDate.saat+1 > 24 ? 00 : baslangicDate.saat+1 ;
-            this.bitisDate=bitisDate;
+            bitisDate.saat = baslangicDate.saat + 1 > 24 ? 00 : baslangicDate.saat + 1;
+            this.bitisDate = bitisDate;
 
         }
     }
 
-    public ArrayList<Integer> getDays() {
+    public ArrayList<Integer> getDayList() {
         return days;
     }
 
-    public int getDays(int position) {
-        return days.get(position);
+    public void addDays(Integer day) {
+
+        for (int i = 0; i < days.size(); i++) {
+
+            if (days.get(i).equals(day)) {
+                Log.d("eklendi","vardi ekelenemedi");
+            } else {
+                days.add(day);
+            }
+        }
     }
 
-    public void setDays(Object position) {
+    public void removeDays(Object position) {
         days.remove(position);
     }
 }
