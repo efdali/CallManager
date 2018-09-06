@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         DateFormat format = new SimpleDateFormat("HH");
         int hour = Integer.valueOf(format.format(calendar.getTime()));
         int minute = calendar.get(Calendar.MINUTE);
-        alarms.add(new Alarm(null, new Date(hour, minute), new Date(hour + 2 >= 24 ? 00 : hour + 2, minute)));
+        alarms.add(new Alarm(null, new Date(hour, minute), new Date(hour + 2 >= 24 ? 23 : hour + 2, hour+2 >=24 ? 59 :minute)));
         allManager.commitAlarms(alarms);
         adapter.notifyDataSetChanged();
 
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getPermission(String permission) {
 
-        if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{permission}, 1);
         }
 

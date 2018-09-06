@@ -144,7 +144,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                     notifyItemRemoved(position);
                     notifyDataSetChanged();
 
-
                 } catch (Exception e) {
                     Toast.makeText(context, "Silinemedi! Sistemsel bir hata... " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 }

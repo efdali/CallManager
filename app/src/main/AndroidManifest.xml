@@ -36,7 +36,7 @@
             android:theme="@style/MessagesTheme"></activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-***********"/>
+            android:value="ca-app-pub-2323838972684036~2519678097"/>
 
     </application>
 

@@ -8,7 +8,6 @@ public class Alarm {
     private ArrayList<Integer> days;
     private boolean state;
     private String message;
-
     public Alarm(ArrayList<Integer> daysList, Date baslangicDate, Date bitisDate) {
 
         this.baslangicDate = baslangicDate;

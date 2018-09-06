@@ -3,7 +3,6 @@ package com.efdalincesu.callmanager.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.efdalincesu.callmanager.MainActivity;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.Models.BlockedCall;
 import com.efdalincesu.callmanager.R;
