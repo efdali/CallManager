@@ -1,7 +1,5 @@
 package com.efdalincesu.callmanager.Models;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 public class Alarm {
@@ -17,10 +15,10 @@ public class Alarm {
         this.bitisDate = bitisDate;
         this.message = "Dersteyim";
         this.state = true;
-        if (daysList!=null) {
+        if (daysList != null) {
             this.days = daysList;
-        }else {
-            this.days=new ArrayList<>();
+        } else {
+            this.days = new ArrayList<>();
         }
 
     }
@@ -78,18 +76,6 @@ public class Alarm {
 
     public ArrayList<Integer> getDayList() {
         return days;
-    }
-
-    public void addDays(Integer day) {
-
-        for (int i = 0; i < days.size(); i++) {
-
-            if (days.get(i).equals(day)) {
-                Log.d("eklendi","vardi ekelenemedi");
-            } else {
-                days.add(day);
-            }
-        }
     }
 
     public void removeDays(Object position) {

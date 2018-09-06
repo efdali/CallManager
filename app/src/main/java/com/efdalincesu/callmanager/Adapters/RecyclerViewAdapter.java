@@ -4,7 +4,6 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -185,10 +184,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 }
                 if (isChecked) {
                     alarmList.get(position).getDayList().add(day);
-                    Log.d("eklendi", "posdan " + position + " " + day + " eklendi");
-                    Log.d("eklendi", "pos : " + position + " " + alarmList.get(position).getDayList().toString());
                 } else {
-                    Log.d("eklendi", day + " kaldırıldı");
                     alarmList.get(position).removeDays(day);
                 }
             }
