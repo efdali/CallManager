@@ -1,10 +1,11 @@
 package com.efdalincesu.callmanager;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -16,13 +17,13 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class BlockedActivity extends AppCompatActivity {
 
     ListView listView;
     ArrayList<BlockedCall> blockedCalls;
     ListViewAdapter adapter;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class BlockedActivity extends AppCompatActivity {
 
         setTitle(getResources().getString(R.string.blocked_calls));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.orange)));
 
         listView = findViewById(R.id.listview);
 

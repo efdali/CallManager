@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +70,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent mesajGonder = new Intent(Intent.ACTION_VIEW);
-                mesajGonder.setData(Uri.parse("sms:"+ list.get(i).getNumber()));
+                mesajGonder.setData(Uri.parse("sms:" + list.get(i).getNumber()));
                 context.startActivity(mesajGonder);
 
             }

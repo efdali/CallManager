@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#26b545"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="15dp"
-    android:clickable="true">
+    android:background="@color/blue"
+    android:clickable="true"
+    android:elevation="15dp">
 
 
     <LinearLayout
@@ -19,146 +17,206 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/basSaat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="18:05"
+                    android:textColor="#fff"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="-"
+                    android:textColor="#fff"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/bitSaat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="22:20"
+                    android:textColor="#fff"
+                    android:textSize="38sp"
+                    android:textStyle="bold" />
+
+                <Switch
+                    android:id="@+id/switchButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:layout_weight="0.5"
+                    android:checked="true"/>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/basSaat"
-                android:layout_width="0dp"
+                android:id="@+id/daysTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="18:05"
-                android:textColor="#fff"
-                android:textSize="25sp"
+                android:paddingLeft="5dp"
+                android:textColor="#f2f2f2"
+                android:textSize="8sp"
                 android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.2"
-                android:gravity="center"
-                android:text="-"
-                android:textColor="#fff"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/bitSaat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="22:20"
-                android:textColor="#fff"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/switchButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="0.5"
-                android:checked="true" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <ToggleButton
-                android:id="@+id/pazartesi"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/pazartesi"
-                android:textOn="@string/pazartesi" />
-
-
-            <ToggleButton
-                android:id="@+id/sali"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/sali"
-                android:textOn="@string/sali" />
-
-            <ToggleButton
-                android:id="@+id/carsamba"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/carsamba"
-                android:textOn="@string/carsamba" />
-
-            <ToggleButton
-                android:id="@+id/persembe"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/persembe"
-                android:textOn="@string/persembe" />
-
-
-            <ToggleButton
-                android:id="@+id/cuma"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/cuma"
-                android:textOn="@string/cuma" />
-
-            <ToggleButton
-                android:id="@+id/cumartesi"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/cumartesi"
-                android:textOn="@string/cumartesi" />
-
-            <ToggleButton
-                android:id="@+id/pazar"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/my_togglebutton"
-                android:textOff="@string/pazar"
-                android:textOn="@string/pazar" />
-
-
-        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
 
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:spinnerMode="dropdown">
 
             </Spinner>
 
-            <Button
+            <ImageButton
+                android:id="@+id/openLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:drawable/ic_menu_delete"
                 android:layout_alignParentRight="true"
-                android:id="@+id/sil"/>
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/down" />
 
         </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <ToggleButton
+                    android:id="@+id/pazartesi"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/pazartesi"
+                    android:textOn="@string/pazartesi" />
+
+
+                <ToggleButton
+                    android:id="@+id/sali"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/sali"
+                    android:textOn="@string/sali" />
+
+                <ToggleButton
+                    android:id="@+id/carsamba"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/carsamba"
+                    android:textOn="@string/carsamba" />
+
+                <ToggleButton
+                    android:id="@+id/persembe"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/persembe"
+                    android:textOn="@string/persembe" />
+
+
+                <ToggleButton
+                    android:id="@+id/cuma"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/cuma"
+                    android:textOn="@string/cuma" />
+
+                <ToggleButton
+                    android:id="@+id/cumartesi"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/cumartesi"
+                    android:textOn="@string/cumartesi" />
+
+                <ToggleButton
+                    android:id="@+id/pazar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:textSize="12sp"
+                    android:background="@drawable/my_togglebutton"
+                    android:textOff="@string/pazar"
+                    android:textOn="@string/pazar"
+                    android:elevation="15dp"/>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/sil"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/ic_menu_delete"
+                    android:layout_alignParentLeft="true"/>
+
+                <ImageButton
+                    android:id="@+id/closeLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/up_arrow"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/black" />
+</RelativeLayout>

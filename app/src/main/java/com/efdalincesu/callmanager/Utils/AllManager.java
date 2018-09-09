@@ -10,7 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 
 public class AllManager {
@@ -130,6 +133,57 @@ public class AllManager {
 
         editor.putStringSet(SHARED_MESSAGES,set);
         editor.commit();
+    }
+
+    public Alarm bul() {
+
+        ArrayList<Alarm> arrayList = getAlarms();
+
+        Calendar calendar = Calendar.getInstance();
+        DateFormat format = new SimpleDateFormat("HH");
+        int saat = Integer.valueOf(format.format(calendar.getTime()));
+        int dakika = calendar.get(Calendar.MINUTE);
+        int gun = calendar.get(Calendar.DAY_OF_WEEK);
+        int baslangicSaat, baslangicDakika, bitisSaat, bitisDakika;
+        boolean state;
+
+        for (Alarm alarm : arrayList) {
+            baslangicSaat = alarm.getBaslangicDate().saat;
+            baslangicDakika = alarm.getBaslangicDate().dakika;
+            bitisSaat = alarm.getBitisDate().saat;
+            bitisDakika = alarm.getBitisDate().dakika;
+            state = alarm.isState();
+            for (int i : alarm.getDayList()) {
+
+                if (i == gun) {
+                    if (state) {
+
+                        if (baslangicSaat == saat && bitisSaat == saat) {
+                            if (baslangicDakika <= dakika && bitisDakika >= dakika) {
+                                return alarm;
+                            }
+                        } else if (baslangicSaat == saat) {
+
+                            if (baslangicDakika <= dakika) {
+                                return alarm;
+                            }
+                        } else if (baslangicSaat < saat) {
+
+                            if (bitisSaat > saat) {
+                                return alarm;
+                            } else if (bitisSaat == saat) {
+                                if (bitisDakika >= dakika) {
+                                    return alarm;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        return null;
+
     }
 
 }

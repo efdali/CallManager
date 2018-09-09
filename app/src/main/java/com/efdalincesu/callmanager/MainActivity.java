@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.efdalincesu.callmanager.Adapters.RecyclerViewAdapter;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.Models.Date;
+import com.efdalincesu.callmanager.Service.MyService;
 import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.ClassAdmob;
 import com.google.android.gms.ads.AdRequest;
@@ -33,9 +34,9 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    RecyclerView recyclerView;
+    public RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
-    RecyclerViewAdapter adapter;
+   public  RecyclerViewAdapter adapter;
     InterstitialAd interstitialAd;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        startService(new Intent(this, MyService.class));
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = ClassAdmob.getAdRequest(this);
         mAdView.loadAd(adRequest);
@@ -127,13 +128,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void createManager() {
 
-//        ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
-//        list.add(calendar.get(Calendar.DAY_OF_WEEK));
+        list.add(calendar.get(Calendar.DAY_OF_WEEK));
         DateFormat format = new SimpleDateFormat("HH");
         int hour = Integer.valueOf(format.format(calendar.getTime()));
         int minute = calendar.get(Calendar.MINUTE);
-        alarms.add(new Alarm(null, new Date(hour, minute), new Date(hour + 2 >= 24 ? 23 : hour + 2, hour+2 >=24 ? 59 :minute)));
+        alarms.add(new Alarm(list, new Date(hour, minute), new Date(hour + 2 >= 24 ? 23 : hour + 2, hour+2 >=24 ? 59 :minute)));
         allManager.commitAlarms(alarms);
         adapter.notifyDataSetChanged();
 
