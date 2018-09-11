@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         getPermission(Manifest.permission.READ_PHONE_STATE);
         getPermission(Manifest.permission.SEND_SMS);
-
+        getPermission(Manifest.permission.READ_CONTACTS);
     }
 
     @Override
