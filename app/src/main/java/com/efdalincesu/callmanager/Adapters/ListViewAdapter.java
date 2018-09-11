@@ -5,13 +5,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 import android.support.v4.app.ActivityCompat;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.efdalincesu.callmanager.Models.BlockedCall;
@@ -52,8 +55,8 @@ public class ListViewAdapter extends BaseAdapter {
         TextView number = view.findViewById(R.id.number);
         TextView saat = view.findViewById(R.id.saat);
         TextView tarih = view.findViewById(R.id.tarih);
-        Button ara = view.findViewById(R.id.ara);
-        Button msj = view.findViewById(R.id.msj);
+        ImageButton ara = view.findViewById(R.id.ara);
+        ImageButton msj = view.findViewById(R.id.msj);
 
         ara.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,10 +79,38 @@ public class ListViewAdapter extends BaseAdapter {
             }
         });
 
-        number.setText(list.get(i).getNumber());
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+        number.setText(getNumber(list.get(i).getNumber()));
         saat.setText(list.get(i).getSaat());
         tarih.setText(list.get(i).getTarih());
 
         return view;
     }
+
+
+    public String getNumber(String number) {
+
+        Cursor phoneCur = context.getContentResolver().query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                null,
+                null,
+                null,
+                null);
+        while (phoneCur.moveToNext()) {
+            String phone = phoneCur.getString(
+                    phoneCur.getColumnIndex(
+                            ContactsContract.CommonDataKinds.Phone.DATA));
+            String name = phoneCur.getString(phoneCur.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+
+            if (number.contains(phone)) {
+                return name;
+            }
+        }
+        phoneCur.close();
+
+
+        return number;
+    }
+
 }

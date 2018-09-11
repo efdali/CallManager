@@ -33,10 +33,10 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
     public RecyclerView recyclerView;
+    public RecyclerViewAdapter adapter;
+    Toolbar toolbar;
     RecyclerView.LayoutManager layoutManager;
-   public  RecyclerViewAdapter adapter;
     InterstitialAd interstitialAd;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         preferences = allManager.preferences;
         editor = allManager.editor;
 
-
         if (!preferences.getBoolean("IS_ICON_CREATED", false)) {
             createShortcut();
             editor.putBoolean("IS_ICON_CREATED", true).commit();
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         getPermission(Manifest.permission.READ_PHONE_STATE);
         getPermission(Manifest.permission.SEND_SMS);
-
 
     }
 
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         DateFormat format = new SimpleDateFormat("HH");
         int hour = Integer.valueOf(format.format(calendar.getTime()));
         int minute = calendar.get(Calendar.MINUTE);
-        alarms.add(new Alarm(list, new Date(hour, minute), new Date(hour + 2 >= 24 ? 23 : hour + 2, hour+2 >=24 ? 59 :minute)));
+        alarms.add(new Alarm(list, new Date(hour, minute), new Date(hour + 2 >= 24 ? 23 : hour + 2, hour + 2 >= 24 ? 59 : minute)));
         allManager.commitAlarms(alarms);
         adapter.notifyDataSetChanged();
 
