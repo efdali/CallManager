@@ -1,4 +1,4 @@
-package com.efdalincesu.callmanager;
+package com.efdalincesu.callmanager.View;
 
 import android.Manifest;
 import android.content.Intent;
@@ -15,16 +15,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.efdalincesu.callmanager.Adapters.RecyclerViewAdapter;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.Models.Date;
+import com.efdalincesu.callmanager.R;
 import com.efdalincesu.callmanager.Service.MyService;
 import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.ClassAdmob;
+import com.efdalincesu.callmanager.View.Adapters.RecyclerViewAdapter;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.gson.Gson;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     InterstitialAd interstitialAd;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    Gson gson;
     Resources res;
 
     AllManager allManager;

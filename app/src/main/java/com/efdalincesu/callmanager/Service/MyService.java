@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,7 +14,7 @@ import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
-import com.efdalincesu.callmanager.MainActivity;
+import com.efdalincesu.callmanager.View.MainActivity;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.R;
 import com.efdalincesu.callmanager.Utils.AllManager;
@@ -27,6 +28,7 @@ public class MyService extends Service {
     private final long time = 10000;
     Timer timer;
     Handler handler;
+    Resources res;
 
     @Override
     public void onCreate() {
@@ -39,7 +41,7 @@ public class MyService extends Service {
                 controlNotification();
             }
         }, 0, time);
-
+        res=getResources();
     }
 
     public void controlNotification() {
@@ -57,16 +59,16 @@ public class MyService extends Service {
                 if (alarm != null) {
 
                     NotificationCompat.BigTextStyle bigTextStyle = new NotificationCompat.BigTextStyle();
-                    bigTextStyle.bigText(alarm.getBaslangicDate().getTarih() + "-" + alarm.getBitisDate().getTarih() + " saatleri arasında manager kurulu");
-                    bigTextStyle.setBigContentTitle("Manager Hatırlatıcı");
+                    bigTextStyle.bigText(alarm.getBaslangicDate().getTarih() + "-" + alarm.getBitisDate().getTarih() +  " "+res.getString(R.string.created_manager));
+                    bigTextStyle.setBigContentTitle(res.getString(R.string.reminder));
                     bigTextStyle.setSummaryText(alarm.getMessage());
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext());
                     builder.setOngoing(true);
                     builder.setSmallIcon(R.mipmap.ic_launcher);
                     builder.setAutoCancel(true);
-                    builder.setContentTitle("Manager Hatırlatıcı");
-                    builder.setContentText("Gelen Çağrılar Meşgule Düşer!");
+                    builder.setContentTitle(res.getString(R.string.reminder));
+                    builder.setContentText(res.getString(R.string.busy));
                     builder.setContentIntent(pendingIntent);
                     builder.setStyle(bigTextStyle);
                     builder.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));

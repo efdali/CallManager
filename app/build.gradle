@@ -6,8 +6,8 @@ android {
         applicationId "com.efdalincesu.callmanager"
         minSdkVersion 19
         targetSdkVersion 27
-        versionCode 4
-        versionName "V4.0"
+        versionCode 5
+        versionName "V5.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

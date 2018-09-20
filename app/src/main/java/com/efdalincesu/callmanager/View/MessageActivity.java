@@ -1,4 +1,4 @@
-package com.efdalincesu.callmanager;
+package com.efdalincesu.callmanager.View;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.efdalincesu.callmanager.R;
 import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.ClassAdmob;
 import com.google.android.gms.ads.AdRequest;
@@ -62,17 +63,15 @@ public class MessageActivity extends AppCompatActivity {
 
         registerForContextMenu(listView);
 
-        allManager =new AllManager(this);
+        allManager = new AllManager(this);
 
-        msgSet= allManager.getMessagesHashSet();
+        msgSet = allManager.getMessagesHashSet();
 
         preferences = allManager.preferences;
         editor = allManager.editor;
 
 
         adapterList = allManager.getMessages();
-
-
 
 
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, adapterList);

@@ -1,4 +1,4 @@
-package com.efdalincesu.callmanager.Adapters;
+package com.efdalincesu.callmanager.View.Adapters;
 
 import android.Manifest;
 import android.app.Activity;

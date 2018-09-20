@@ -1,4 +1,4 @@
-package com.efdalincesu.callmanager.Adapters;
+package com.efdalincesu.callmanager.View.Adapters;
 
 import android.app.Activity;
 import android.app.TimePickerDialog;
@@ -22,13 +22,13 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
-import com.efdalincesu.callmanager.MainActivity;
 import com.efdalincesu.callmanager.Models.Alarm;
 import com.efdalincesu.callmanager.Models.Date;
 import com.efdalincesu.callmanager.R;
 import com.efdalincesu.callmanager.Utils.AllManager;
 import com.efdalincesu.callmanager.Utils.IDays;
 import com.efdalincesu.callmanager.Utils.MyDialog;
+import com.efdalincesu.callmanager.View.MainActivity;
 
 import java.util.ArrayList;
 
