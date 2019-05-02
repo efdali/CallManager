@@ -1,6 +1,6 @@
 # CallManager
 
-**Projenin Amacı**
+**Projenin Amacı** <br/>
 Alarm gibi kurulan gün ve saatler arasında gelen çağrıları redderek arayan kişiye seçili mesajı göndermek.
 
 ## Google Play Linki
